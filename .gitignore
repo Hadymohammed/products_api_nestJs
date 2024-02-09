@@ -1,6 +1,5 @@
 #temp
 app.controller.ts
-app.module.ts
 app.service.ts
 app.controller.spec.ts
 
