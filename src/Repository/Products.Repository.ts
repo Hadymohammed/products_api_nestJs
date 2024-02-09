@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Product } from '../Models/Product.Model';
 @Injectable()
 export class ProductsRepository {
+  private lastId: number=8;
   products: Product[] = [
     {
       id: 1,
@@ -67,6 +68,7 @@ export class ProductsRepository {
         'https://cdn.thewirecutter.com/wp-content/media/2023/06/bestlaptops-2048px-9765.jpg?auto=webp&quality=75&width=1024',
     },
   ];
+
   //add a method to get all products
   getAllProducts() {
     return this.products;
@@ -77,6 +79,7 @@ export class ProductsRepository {
   }
   //add a method to add a product
   addProduct(product: Product) {
+    this.lastId++;
     this.products.push(product);
   }
   //add a method to update a product
@@ -87,5 +90,8 @@ export class ProductsRepository {
   //add a method to delete a product
   deleteProduct(id: number) {
     this.products = this.products.filter((p) => p.id != id);
+  }
+  getLastId(){
+    return this.lastId;
   }
 }

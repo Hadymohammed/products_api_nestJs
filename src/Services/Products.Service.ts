@@ -18,7 +18,7 @@ export class ProductsService {
   //add a method to add a product
   addProduct(product: CreateProductDto) {
     let productModel: Product = {
-      id: this.productsRepository.products.length + 1,
+      id: this.productsRepository.getLastId() + 1,
       name: product.name,
       price: product.price,
       description: product.description,
@@ -41,6 +41,10 @@ export class ProductsService {
   }
   //add a method to delete a product
   deleteProduct(id: number) {
+    let dbProduct = this.productsRepository.getProduct(id);
+    if (!dbProduct) {
+      throw new NotFoundException();
+    }
     this.productsRepository.deleteProduct(id);
   }
 }
